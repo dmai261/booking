@@ -1,17 +1,41 @@
 {
-  "name": "",
-  "version": "",
+  "name": "fec",
+  "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": "David Mai",
   "license": "",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "start": "nodemon server/server.js",
+    "live": "live-server --port=3004",
+    "react-dev": "webpack -D --watch"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "moment": "^2.22.2",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.1",
+    "nodemon": "^1.18.4",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "sequelize": "^4.38.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "sequelize-cli": "^4.1.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
   }
 }
