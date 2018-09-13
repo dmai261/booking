@@ -10,7 +10,8 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "live": "live-server --port=3004",
-    "react-dev": "webpack -D --watch"
+    "react-dev": "webpack -D --watch",
+    "test":"jest"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

@@ -1,20 +1,15 @@
 const Sequelize = require('sequelize');
-const Config = require('./config.js');
 
-const sequelize = new Sequelize('betterbnb', Config.username, Config.password, {
+const sequelize = new Sequelize('booking', 'root', 'password', {
   host: 'localhost',
-  dialet: 'mysql',
-  define: {
-    timestamps: false,
-  },
+  dialect: 'mysql',
 });
 
-const Calender = sequelize.define('calendar', {
-  id: { type: Sequelize.INTEGER, primaryKey: true },
-  date: Sequelize.DATE,
+const Calendar = sequelize.define('Calendars', {
+  date: Sequelize.STRING,
 });
 
-const House = sequelize.define('houses', {
+const House = sequelize.define('Houses', {
   house_id: Sequelize.INTEGER,
   reviews: Sequelize.INTEGER,
   price_per_night: Sequelize.INTEGER,
@@ -22,7 +17,7 @@ const House = sequelize.define('houses', {
   cleaning_fee: Sequelize.INTEGER,
 });
 
-const CustomerInfo = sequelize.define('customerInfo', {
+const CustomerInfo = sequelize.define('CustomerInfos', {
   house_id: Sequelize.INTEGER,
   price_per_night: Sequelize.INTEGER,
   service_fee: Sequelize.INTEGER,
@@ -34,3 +29,9 @@ const CustomerInfo = sequelize.define('customerInfo', {
   start_date: Sequelize.INTEGER,
   end_date: Sequelize.INTEGER,
 });
+
+module.exports = {
+  House:House,
+  Calendar:Calendar,
+  CustomerInfo:CustomerInfo
+}

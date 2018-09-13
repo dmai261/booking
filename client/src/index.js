@@ -1,14 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-class Booking extends React.Component {
-  render() {
-    return (
-      <div>
-
-      </div>
-    )
-  }
-}
+import Booking from './components/app.jsx';
 
 ReactDOM.render(<Booking />, document.getElementById('booking'));
