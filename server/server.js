@@ -6,7 +6,7 @@ const port = process.env.PORT || 3004;
 app.use('/public/:id', express.static('public'));
 
 app.get('/house/:id', (req, res) => {
-  console.log('fuck')
+
   db.House.sync().then(()=> {
     return db.House.findAll()
   }).then((data)=>{
