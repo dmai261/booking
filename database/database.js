@@ -10,7 +10,7 @@ const Calendar = sequelize.define('Calendars', {
 });
 
 const House = sequelize.define('Houses', {
-  house_id: Sequelize.INTEGER,
+  house_id: {type: Sequelize.INTEGER, unique:true},
   reviews: Sequelize.INTEGER,
   price_per_night: Sequelize.INTEGER,
   service_fee: Sequelize.INTEGER,

@@ -10,7 +10,6 @@ app.get('/house/:id', (req, res) => {
   db.House.sync().then(()=> {
     return db.House.findAll()
   }).then((data)=>{
-    console.log(JSON.parse(JSON.stringify(data)));
     for (var i = 0; i < data.length; i++) {
       if (data[i].house_id === Number(req.params.id)) {
         res.send(data[i]);
