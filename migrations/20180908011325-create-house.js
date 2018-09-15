@@ -11,6 +11,7 @@ module.exports = {
       },
       house_id: {
         type: Sequelize.INTEGER,
+        unique:true,
       },
       reviews: {
         type: Sequelize.INTEGER,

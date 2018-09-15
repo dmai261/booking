@@ -1,7 +1,7 @@
 'use strict';
 
 const data = [];
-for (let i = 100; i < 199; i += 1) {
+for (let i = 100; i < 200; i += 1) {
   data.push({
     house_id: i,
     reviews: Math.floor(Math.random() * 1000),
