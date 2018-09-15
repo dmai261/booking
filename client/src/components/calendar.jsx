@@ -15,18 +15,18 @@ const LabelForDates = styled.div`
 `
 const StyledWordCheckIn = styled.div`
   font-weight: normal !important;
-   font-size: 17px !important;
-   line-height: 22px !important;
-   color: #757575 !important;
-   margin: 0px !important;
-   padding: 8px !important;
-   background: #fff !important;
-   position: relative !important;
-   display: inline-block !important;
-   width: -webkit-calc(50% - 12px) !important;
-   width: -moz-calc(50% - 12px) !important;
-   width: calc(50% - 12px) !important;
-   vertical-align: middle !important;
+  font-size: 17px !important;
+  line-height: 22px !important;
+  color: #757575 !important;
+  margin: 0px !important;
+  padding: 8px !important;
+  background: #fff !important;
+  position: relative !important;
+  display: inline-block !important;
+  width: -webkit-calc(50% - 12px) !important;
+  width: -moz-calc(50% - 12px) !important;
+  width: calc(50% - 12px) !important;
+  vertical-align: middle !important;
 `
 
 const StyledWordCheckOut = styled.span`
@@ -34,18 +34,19 @@ const StyledWordCheckOut = styled.span`
   font-size: 17px !important;
   line-height: 22px !important;
   color: #757575 !important;
+  margin: 0px !important;
+  padding: 8px !important;
   background: #fff !important;
+  position: relative !important;
+  width: -webkit-calc(50% - 12px) !important;
+  width: -moz-calc(50% - 12px) !important;
+  width: calc(50% - 12px) !important;
   vertical-align: middle !important;
-  text-align: right;
 `
 const StyledArrow = styled.div`
-  display:inline-block;
-  height: 24px;
-  width: 24px;
-  font-weight: normal !important;
-  font-size: 17px !important;
-  line-height: 22px !important;
   color: #757575 !important;
+  display:inline-block;
+  vertical-align: middle;
 `
 
 const StyledWordContainer = styled.div`
@@ -75,29 +76,23 @@ class Calendar extends React.Component {
             Dates
           </LabelForDates>
         </div>
-        <CheckInOutContainer>
+        <CheckInOutContainer >
           <div style={{"fontWeight":"600"}}>
           <StyledWordContainer>
+
               <StyledWordCheckIn>
                 <div style={{"whiteSpace": "no-wrap", "overflow":"hidden"}}>
-                  Check in
-
+                Check in
                 </div>
               </StyledWordCheckIn>
 
-              <StyledWordCheckIn>
-                <div style={{"whiteSpace": "no-wrap", "overflow":"hidden"}}>
-                -->
+              <StyledArrow>
+                ->
+              </StyledArrow>
 
-                </div>
-              </StyledWordCheckIn>
-
-              <StyledWordCheckIn>
-                <div style={{"whiteSpace": "no-wrap", "overflow":"hidden"}}>
-
+              <StyledWordCheckOut>
                 Check out
-                </div>
-              </StyledWordCheckIn>
+              </StyledWordCheckOut>
 
           </StyledWordContainer>
           </div>

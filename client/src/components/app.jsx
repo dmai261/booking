@@ -5,94 +5,142 @@ import Guest from './guest.jsx';
 import styled from 'styled-components';
 
 const Button = styled.button`
-  cursor: pointer !important;
-  display: inline-block !important;
-  margin: 0px !important;
-  position: relative !important;
-  text-align: center !important;
-  text-decoration: none !important;
-  -webkit-transition-property: background, border-color, color !important;
-  -moz-transition-property: background, border-color, color !important;
-  transition-property: background, border-color, color !important;
-  -webkit-transition-duration: 0.2s !important;
-  transition-duration: 0.2s !important;
-  -webkit-transition-timing-function: ease-out !important;
-  transition-timing-function: ease-out !important;
-  border-radius: 4px !important;
-  width: 100% !important;
-  font-size: 16px !important;
-  line-height: 22px !important;
-  letter-spacing: normal !important;
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-  text-transform: undefined !important;
-  padding-top: 12px !important;
-  padding-bottom: 12px !important;
-  font-weight: 800 !important;
-  border-width: 2px !important;
-  border-style: solid !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-  min-width: 77.66563145999496px !important;
-  box-shadow: none !important;
-  background: #FF5A5F !important;
-  border-color: transparent !important;
-  color: #ffffff !important;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  -webkit-transition-property: background, border-color, color;
+  -moz-transition-property: background, border-color, color;
+  transition-property: background, border-color, color;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  border-radius: 4px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  text-transform: undefined;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: 800;
+  border-width: 2px;
+  border-style: solid;
+  padding-left: 24px;
+  padding-right: 24px;
+  min-width: 77.66563145999496px;
+  box-shadow: none;
+  background: #FF5A5F;
+  border-color: transparent;
+  color: #ffffff;
 `
 
 const Booking_container = styled.div`
-  padding-left: 24px !important;
-   padding-right: 24px !important;
-   margin: 0px !important;
-   border: 1px solid #e4e4e4 !important;
-   background-color: #ffffff !important;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: 0px;
+  border: 1px solid #e4e4e4;
+  background-color: #ffffff;
 `
 
 const DollarPerNight = styled.span`
-word-wrap: break-word !important;
-font-size: 18px !important;
-line-height: 26px !important;
-letter-spacing: normal !important;
-font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
-color: rgb(72, 72, 72) !important;
-font-weight: 800 !important;
-display: inline !important;
-margin: 0px !important;
+  word-wrap: break-word;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: normal;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  color: rgb(72, 72, 72);
+  font-weight: 800;
+  display: inline;
+  margin: 0px;
 `
 
 const PerNight = styled.span`
-font-weight: 600 !important;
-   margin: 0px !important;
-   word-wrap: break-word !important;
-   font-size: 12px !important;
-   line-height: 16px !important;
-   letter-spacing: normal !important;
-   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-   text-transform: undefined !important;
-   color: #484848 !important;
-   padding-top: undefined !important;
-   padding-bottom: undefined !important;
-   display: inline !important;
+  font-weight: 600;
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  text-transform: undefined;
+  color: #484848;
+  padding-top: undefined;
+  padding-bottom: undefined;
+  display: inline;
 `
 
 const Reviews = styled.div`
-font-weight: 600 !important;
-   margin: 0px !important;
+  font-weight: 600;
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  text-transform: undefined;
+  color: #484848;
+  padding-top: undefined;
+  padding-bottom: undefined;
+  display: inline;
+`
+
+const Line = styled.div`
+  margin-top: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #EBEBEB;
+`
+
+const NoCharge = styled.div`
+  font-weight: 600;
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  color: #484848;
+  text-align: center;
+`
+
+const FooterMessage = styled.div`
+  margin-top: 6px;
+  margin: 0px !important;
    word-wrap: break-word !important;
-   font-size: 12px !important;
-   line-height: 16px !important;
+   font-size: 14px !important;
+   line-height: 18px !important;
    letter-spacing: normal !important;
    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
    text-transform: undefined !important;
    color: #484848 !important;
    padding-top: undefined !important;
    padding-bottom: undefined !important;
-   display: inline !important;
+   font-weight: normal !important;
 `
 
-const Line = styled.div`
-margin-top: 16px;
-margin-bottom: 16px;
-border-bottom: 1px solid #EBEBEB;
+const FooterHeader = styled.div`
+font-weight: 600 !important;
+   word-wrap: break-word !important;
+   font-size: 14px !important;
+   line-height: 18px !important;
+   letter-spacing: normal !important;
+   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
+   color: rgb(72, 72, 72) !important;
+   display: inline !important;
+   margin: 0px !important;
+`
+
+const Image = styled.div`
+background-image: url(https://a0.muscache.com/airbnb/static/page3/icon-uc-tag-e7b50003027fb27234690eb38ae9abdd.gif);
+background-size: 48px !important;
+margin-top: 0px !important;
+transition: margin-top 0.4s ease 0s !important;
+background-repeat: no-repeat !important;
+background-position: right center !important;
 `
 class Booking extends React.Component {
   constructor(props) {
@@ -103,7 +151,8 @@ class Booking extends React.Component {
         Adult: 1,
         Children: 0,
         Infants: 0,
-      }
+      },
+      fees: false,
     }
   }
 
@@ -125,25 +174,55 @@ class Booking extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{"marginLeft":"45px","width": "376px", "zIndex": "3", "position":"absolute","top":"32px"}}>
         <Booking_container>
+
         <div style={{"marginTop":"16px", "marginBottom":"8px"}}>
           <DollarPerNight>${this.state.house_info.price_per_night}</DollarPerNight>
           <PerNight> per night</PerNight>
         </div>
+
         <span>
         <img src="https://www.corginb.com/wp-content/uploads/2018/07/airbnb-reviews-stars.png" height="13" weight="13"></img>
         </span>
-        <Reviews>{this.state.house_info.reviews}</Reviews>
-        <Line></Line>
-        <div>
-          <Calendar />
-          <Guest guests={this.state.guest_info} func={this.setState.bind(this)}/>
 
+        <Reviews>{this.state.house_info.reviews}</Reviews>
+
+        <Line></Line>
+
+        <div style={{"marginTop":"16px", "marginBottom":"8px"}}>
+          <Calendar stateSetter={this.setState.bind(this)}/>
+          <Guest guests={this.state.guest_info} func={this.setState.bind(this)}/>
         </div>
-        <div>Service Fee: {this.state.house_info.service_fee}</div>
-        <div>Cleaning Fee: {this.state.house_info.cleaning_fee}</div>
-        <Button type='button' className='bookingbtn' onClick={()=>this.handleClick()}>Booking</Button>
+
+        {this.state.fees &&
+        <div>
+          <div>Service fee: {this.state.house_info.service_fee}</div>
+          <div>Cleaning Fee: {this.state.house_info.cleaning_fee}</div>
+          <div>Total </div>
+        </div>}
+
+        <Button type='button' className='bookbtn' onClick={()=>this.handleClick()}>Book</Button>
+
+        <div style={{"marginTop":"16px", "marginBottom":"8px","verticalAlign":"middle"}}>
+          <NoCharge>You won't be charged yet</NoCharge>
+        </div>
+        
+        <Line></Line>
+
+        <FooterMessage>
+          <Image>
+            <div style={{"minHeight":"34px", "width": "84%"}}>
+              <FooterHeader>
+                New lower price
+              </FooterHeader>
+              <div>
+                Price for your trip was just lowered by $2,000,000.
+              </div>
+            </div>
+          </Image>
+        </FooterMessage>
+        
         </Booking_container>
       </div>
     )
