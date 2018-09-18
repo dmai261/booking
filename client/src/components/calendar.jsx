@@ -29,6 +29,13 @@ const StyledWordCheckIn = styled.div`
   width: -moz-calc(50% - 12px);
   width: calc(50% - 12px);
   vertical-align: middle;
+  &: focus {
+    background: rgb(228,231,231)
+
+  }
+  &: hover {
+    background: rgb(228,231,231)
+  }
 `
 const StyledWordCheckOut = styled.span`
   font-weight: normal;
@@ -44,6 +51,10 @@ const StyledWordCheckOut = styled.span`
   width: -moz-calc(50% - 12px);
   width: calc(50% - 12px);
   vertical-align: middle;
+
+  &: hover {
+    background: rgb(228,231,231)
+  }
 `
 const StyledArrow = styled.div`
   color: #757575;
@@ -70,6 +81,7 @@ const CalendarContainer = styled.div`
   background: rgb(255, 255, 255);
   border-radius: 3px;
   z-index: 1;
+  transition: height 0.2s ease-in-out 0s !important;
 `
 const LeftArrowContainer = styled.span`
   background-color: rgb(255, 255, 255);
@@ -85,6 +97,10 @@ const LeftArrowContainer = styled.span`
   border-image: initial;
   border-radius: 3px;
   padding: 6px 9px;
+
+  &: hover {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px !important;
+  }
 `
 const Arrow = styled.div`
   height: 19px;
@@ -106,6 +122,10 @@ const RightArrowContainer = styled.span`
   border-image: initial;
   border-radius: 3px;
   padding: 6px 9px;
+
+  &: hover {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px !important;
+  }
 `
 const CalendarHeader = styled.div`
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
@@ -128,6 +148,7 @@ const WeekdayContainerContainer = styled.div`
   text-align: left;
   left: 0px;
   padding: 0px 21px;
+  user-select: none;
 `
 const WeekdayContainer = styled.ul`
   padding-left: 0px;
@@ -143,19 +164,25 @@ const Weekdays = styled.li`
   display: inline-block;
   text-align: center;
 `
-
-const MonthContainer = styled.div`
-  border-collapse: collapse;
+const MonthContainer = styled.table`
   width: 100%;
   text-align: center;
-  margin-left: 18px
+  border-collapse: collapse;
+  border-spacing: 0px;
+  max-width: 288px;
+  margin-top: 4px;
+  margin-left: 22px;
+  margin-bottom: 12px;
 `
+
 class Calendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       monthSelected: moment(),
-      clicked: false,
+      startDateCalendarPicker: false,
+      endDateCalendarPicker: false,
+      dateChosen: [],
     }
   }
 
@@ -166,7 +193,7 @@ class Calendar extends React.Component {
     for (var i = 0; i < 365; i++) {
       let dateObj = {};
       let currMonth = date.get('month');
-      let value = date.format('dddd,D,YYYY');
+      let value = date.format('dddd,MMMM,D,YYYY');
       dateObj[currMonth] = value;
       dates.push(dateObj);
       date.add(1, 'days');
@@ -183,11 +210,25 @@ class Calendar extends React.Component {
         datesInCurrentMonth.push(dates[i]);
       }
     }
-
     return datesInCurrentMonth;
   }
-  render() {
 
+  startDatePicker(date) {
+    this.setState((prevState)=>{
+      return {startDate: date, startDateCalendarPicker: false, endDateCalendarPicker: true}
+    });
+  }
+
+  endDatePicker(date) {
+    this.setState({endDate: date, endDateCalendarPicker: false},(prevState)=>{
+      if (this.state.startDate && this.state.endDate) {
+        let days = Math.abs((new Date(this.state.endDate) - new Date(this.state.startDate)) / (1000*60*60*24));
+        this.props.stateSetter({fees: true, days: days});
+      }
+    });
+  }
+
+  render() {
     return (
       <div>
         <div style={{'marginTop':'16px', 'marginBottom':'8px'}}>
@@ -195,11 +236,11 @@ class Calendar extends React.Component {
             Dates
           </LabelForDates>
         </div>
-        <CheckInOutContainer onClick={()=>this.setState({'clicked': !this.state.clicked})}>
+        <CheckInOutContainer>
           <div style={{'fontWeight':'600'}}>
           <StyledWordContainer>
 
-              <StyledWordCheckIn>
+              <StyledWordCheckIn onClick={()=>this.setState({'endDateCalendarPicker': false, 'startDateCalendarPicker': !this.state.startDateCalendarPicker})}>
                 <div style={{'whiteSpace': 'no-wrap', 'overflow':'hidden'}}>
                   Check in
                 </div>
@@ -212,14 +253,74 @@ class Calendar extends React.Component {
                 </svg>
               </StyledArrow>
 
-              <StyledWordCheckOut>
+              <StyledWordCheckOut onClick={()=>this.setState({'endDateCalendarPicker': !this.state.endDateCalendarPicker, 'startDateCalendarPicker': false})}>
                 Check out
               </StyledWordCheckOut>
 
           </StyledWordContainer>
           </div>
         </CheckInOutContainer>
-        {this.state.clicked &&
+
+        {this.state.startDateCalendarPicker &&
+        <div>
+           <CalendarContainer>
+             <CalendarHeader>
+              <LeftArrowContainer onClick={()=>this.setState({monthSelected: this.state.monthSelected.subtract(1,'month')})}>
+                <Arrow>
+                  <svg focusable='false' viewBox='0 0 1000 1000'>
+                    <path d='M336.2 274.5l-210.1 210h805.4c13 0 23 10 23 23s-10 23-23 23H126.1l210.1 210.1c11 11 11 21 0 32-5 5-10 7-16 7s-11-2-16-7l-249.1-249c-11-11-11-21 0-32l249.1-249.1c21-21.1 53 10.9 32 32z'>
+                    </path>
+                  </svg>
+                </Arrow>
+              </LeftArrowContainer>
+
+              <MonthHeader>
+                {this.state.monthSelected.format('MMMM')}
+              </MonthHeader>
+
+              <RightArrowContainer onClick={()=>this.setState((prevState, props)=>({monthSelected: prevState.monthSelected.add(1,'month')}))}>
+                <Arrow>
+                  <svg focusable='false' viewBox='0 0 1000 1000'>
+                    <path d='M694.4 242.4l249.1 249.1c11 11 11 21 0 32L694.4 772.7c-5 5-10 7-16 7s-11-2-16-7c-11-11-11-21 0-32l210.1-210.1H67.1c-13 0-23-10-23-23s10-23 23-23h805.4L662.4 274.5c-21-21.1 11-53.1 32-32.1z'>
+                    </path>
+                  </svg>
+                </Arrow>
+              </RightArrowContainer>
+              
+              <WeekdayContainerContainer>
+                <WeekdayContainer>
+                  <Weekdays>
+                    Su
+                  </Weekdays>
+                  <Weekdays>
+                    Mo
+                  </Weekdays>
+                  <Weekdays>
+                    Tu
+                  </Weekdays>
+                  <Weekdays>
+                    We
+                  </Weekdays>
+                  <Weekdays>
+                    Th
+                  </Weekdays>
+                  <Weekdays>
+                    Fr
+                  </Weekdays>
+                  <Weekdays>
+                    Sa
+                  </Weekdays>
+                </WeekdayContainer>
+              </WeekdayContainerContainer>
+             </CalendarHeader>
+            <MonthContainer>
+              <Month datePicker={this.startDatePicker.bind(this)} monthNumber={this.state.monthSelected.get('month')} months={this.getMonthDates.bind(this)} />
+            </MonthContainer>
+          </CalendarContainer>
+          </div>}
+
+          {this.state.endDateCalendarPicker &&
+          <div>
            <CalendarContainer>
              <CalendarHeader>
               <LeftArrowContainer onClick={()=>this.setState({monthSelected: this.state.monthSelected.subtract(1,'month')}, (prevState, props)=>(console.log('wtfman',this.state.monthSelected.get('month'))))}>
@@ -271,9 +372,10 @@ class Calendar extends React.Component {
               </WeekdayContainerContainer>
              </CalendarHeader>
             <MonthContainer>
-              <Month monthNumber={this.state.monthSelected.get('month')} months={this.getMonthDates.bind(this)} />
+              <Month datePicker={this.endDatePicker.bind(this)} monthNumber={this.state.monthSelected.get('month')} months={this.getMonthDates.bind(this)} />
             </MonthContainer>
-          </CalendarContainer>}
+          </CalendarContainer>
+          </div>}
       </div>
     )
   }

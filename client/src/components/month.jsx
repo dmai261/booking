@@ -1,9 +1,8 @@
 import React from 'react';
 import Week from './week.jsx';
 import styled from 'styled-components';
-
-const WeekContainer = styled.div`
-  display: table-row;
+// display: table;
+const WeekContainer = styled.tbody`
   vertical-align: middle;
   width: 100%;
 `
@@ -11,6 +10,8 @@ const WeekContainer = styled.div`
 class Month extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+    }
   }
   
   renderMonth() {  
@@ -29,14 +30,16 @@ class Month extends React.Component {
                   [0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0],
-                  [0,0,0,0,0,0,0],
                   [0,0,0,0,0,0,0]];
     let row = 0;
     let index = 0;
     let currDate = monthData[index][currMonth].split(",");
     while (index !== monthData.length) {
       for (var col = monthObj[currDate[0]]; col <= 6; col++) {
-        matrix[row][col] = Number(currDate[1]);
+        if (!matrix[row]) {
+          matrix.push([0,0,0,0,0,0,0]);
+        }
+        matrix[row][col] = [Number(currDate[2]), currDate.join(",")];
         index++;
 
         if (index !== monthData.length) {
@@ -50,13 +53,13 @@ class Month extends React.Component {
   }
 
   render() {
-    return (
-      <WeekContainer>
-        {this.renderMonth().map((week, i)=>{
-          return (<Week key={i} week={week}/>)
-        })}
-      </WeekContainer>
-    )
+      return (
+        <WeekContainer>
+          {this.renderMonth().map((week, i)=>{
+            return (<Week datePicker={this.props.datePicker} key={i} week={week}/>)
+          })}
+        </WeekContainer>
+      )
   }
 }
 

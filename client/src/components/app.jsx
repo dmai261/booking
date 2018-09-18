@@ -39,11 +39,14 @@ const Button = styled.button`
 `
 
 const Booking_container = styled.div`
+  -webkit-font-smoothing: antialiased;
   padding-left: 24px;
   padding-right: 24px;
   margin: 0px;
+  margin-top: 24px;
   border: 1px solid #e4e4e4;
   background-color: #ffffff;
+  user-select: none;
 `
 
 const DollarPerNight = styled.span`
@@ -145,6 +148,31 @@ const Image = styled.div`
   background-repeat: no-repeat;
   background-position: right center;
 `
+
+const FeesContainer = styled.div`
+  display: table;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.43;
+  color: #484848;
+  margin-top: 20px;
+  margin-bottom: 24px;
+  width:100%;
+`
+const FeeRows = styled.div`
+  display: table;
+  width: 100%;
+`
+const FeeStyling = styled.div`
+  display: table-cell;
+  width: 100%;
+`
+const FeeLine = styled.div`
+  margin-top: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #EBEBEB;
+`
+
 class Booking extends React.Component {
   constructor(props) {
     super(props);
@@ -233,11 +261,34 @@ class Booking extends React.Component {
         </div>
 
         {this.state.fees &&
-        <div>
-          <div>Service fee: {this.state.house_info.service_fee}</div>
-          <div>Cleaning Fee: {this.state.house_info.cleaning_fee}</div>
-          <div>Total </div>
-        </div>}
+        <FeesContainer>
+          <FeeRows>
+            <FeeStyling>${this.state.house_info.price_per_night + ' x'} {this.state.days} nights</FeeStyling>
+            <FeeStyling>${this.state.house_info.price_per_night * this.state.days}</FeeStyling>
+          </FeeRows>
+
+          <FeeLine></FeeLine>
+
+          <FeeRows>
+            <FeeStyling>Cleaning fee: </FeeStyling>
+            <FeeStyling>${this.state.house_info.cleaning_fee}</FeeStyling>
+          </FeeRows>
+
+          <FeeLine></FeeLine>
+
+          <FeeRows>
+            <FeeStyling>Service fee: </FeeStyling>
+            <FeeStyling>${this.state.house_info.service_fee}</FeeStyling>
+          </FeeRows>
+          <FeeLine></FeeLine>
+          
+          <FeeRows>
+            <FeeStyling style={{"fontWeight":"bold"}}>Total: </FeeStyling>
+            <FeeStyling style={{"fontWeight":"bold"}}>${this.state.house_info.price_per_night * this.state.days + this.state.house_info.service_fee + this.state.house_info.cleaning_fee} </FeeStyling>
+          </FeeRows>
+          
+
+        </FeesContainer>}
 
         <Button type='button' className='bookbtn' onClick={()=>console.log('Booked!')}>Book</Button>
 
