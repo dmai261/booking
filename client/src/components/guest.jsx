@@ -67,15 +67,15 @@ const DropDownMenu = styled.div`
   margin-top: 8px;
 `
 const ContainerForDropDown = styled.div`
-  position: relative;
+  position: absolute;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
   width: 100%;
-  min-width: 326px;
+  max-width: 326px;
+  vertical-align: middle;
   text-align: left;
   margin-bottom: 16px;
   box-sizing: border-box;
   z-index: 2;
-  left: 0px;
   background: rgb(255, 255, 255);
   border-radius: 3px;
   padding: 0px 16px;
@@ -114,8 +114,13 @@ const PlusMinus = styled.button`
   background: transparent;
   border-width: 1px;
 `
+const DisabledPlusMinus = styled(PlusMinus)`
+  border-color: rgba(0, 132, 137, 0.3);
+  background: transparent;
+`
 
 const DropDownEntryStyle = styled.span`
+  color: rgb(0, 132, 137);
   font-weight: 600;
   margin: 0px;
   word-wrap: break-word;
@@ -123,6 +128,10 @@ const DropDownEntryStyle = styled.span`
   line-height: 22px;
   letter-spacing: normal;
   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+`
+const DisabledDropDownEntryStyle = styled(DropDownEntryStyle)`
+  color: rgba(0, 132, 137, 0.3) !important;
+  background: transparent;
 `
 class Guest extends React.Component {
   constructor(props) {
@@ -158,7 +167,7 @@ class Guest extends React.Component {
             </ContainerForGuests>
             </Button2>}
 
-          <div style={{"display":"block","width":"50%"}}>
+          <div style={{"textAlign":"center"}}>
             {this.state.toggle &&
             <ContainerForDropDown>
               <DropDownMenu>
@@ -173,9 +182,13 @@ class Guest extends React.Component {
                     <Cell>
                       <InnerTable>
                         <div style={{"display":"table-cell","textAlign":"left"}}>  
+                        {this.state.guests.Adult !== 0 ?
                           <PlusMinus onClick={()=>{this.state.guests.Adult -= 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>-</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>-</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"middle"}}>
@@ -183,9 +196,13 @@ class Guest extends React.Component {
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"right"}}>
+                        {this.state.guests.Adult + this.state.guests.Children !== 2 ?
                           <PlusMinus onClick={()=>{this.state.guests.Adult += 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>+</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>+</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                       </InnerTable>
                     </Cell>
@@ -203,10 +220,14 @@ class Guest extends React.Component {
 
                     <Cell>
                       <InnerTable>
-                        <div style={{"display":"table-cell","textAlign":"left"}}>  
+                        <div style={{"display":"table-cell","textAlign":"left"}}>
+                          {this.state.guests.Children !== 0 ?
                           <PlusMinus onClick={()=>{this.state.guests.Children -= 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>-</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>-</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"middle"}}>
@@ -214,9 +235,13 @@ class Guest extends React.Component {
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"right"}}>
+                        {this.state.guests.Adult + this.state.guests.Children !== 2 ?
                           <PlusMinus onClick={()=>{this.state.guests.Children += 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>+</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>+</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                       </InnerTable>
                     </Cell>
@@ -234,9 +259,13 @@ class Guest extends React.Component {
                     <Cell>
                       <InnerTable>
                         <div style={{"display":"table-cell","textAlign":"left"}}>  
+                        {this.state.guests.Infants !== 0 ?
                           <PlusMinus onClick={()=>{this.state.guests.Infants -= 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>-</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>-</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"middle"}}>
@@ -244,9 +273,13 @@ class Guest extends React.Component {
                         </div>
                           
                         <div style={{"display":"table-cell","textAlign":"right"}}>  
+                        {this.state.guests.Infants !== 5 ?
                           <PlusMinus onClick={()=>{this.state.guests.Infants += 1; this.props.func({guest_info: this.state.guests})}}>
                             <DropDownEntryStyle>+</DropDownEntryStyle>
                           </PlusMinus>
+                          : <DisabledPlusMinus>
+                              <DisabledDropDownEntryStyle>+</DisabledDropDownEntryStyle>
+                            </DisabledPlusMinus>}
                         </div>
                       </InnerTable>
                     </Cell>
