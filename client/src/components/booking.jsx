@@ -188,8 +188,8 @@ class Booking extends React.Component {
   }
 
   componentDidMount() {
-    let url = this.props.match.url.match(/[0-9]+/g)
-    fetch('/house/' + url[0], {
+    let url = this.props.url.href.split("/").reverse().join().match(/[0-9]+/g)[0];
+    fetch('/house/' + url, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'

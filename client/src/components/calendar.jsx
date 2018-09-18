@@ -29,10 +29,7 @@ const StyledWordCheckIn = styled.div`
   width: -moz-calc(50% - 12px);
   width: calc(50% - 12px);
   vertical-align: middle;
-  &: focus {
-    background: rgb(228,231,231)
-
-  }
+  
   &: hover {
     background: rgb(228,231,231)
   }

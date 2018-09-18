@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Booking from './components/app.jsx';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Booking from './components/booking.jsx';
 
 ReactDOM.render(
-<Router>
-  <Route path="/public/:id" component={Booking}/>
-</Router>
+React.createElement(Booking, {url: window.location}, null)
 , document.getElementById('booking'));
