@@ -1,6 +1,5 @@
 import React from 'react';
 import Calendar from './calendar.jsx';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Guest from './guest.jsx';
 import styled from 'styled-components';
 
@@ -88,7 +87,14 @@ const Reviews = styled.div`
   padding-bottom: undefined;
   display: inline;
 `
-
+const Stars = styled.span`
+  display: inline-block;
+  color: #008489;
+  font-size: 9px;
+  height: 10px;
+  margin-right: 1px;
+  width: 9px;
+`
 const Line = styled.div`
   margin-top: 16px;
   margin-bottom: 16px;
@@ -109,38 +115,35 @@ const NoCharge = styled.div`
 
 const FooterMessage = styled.div`
   margin-top: 6px;
-  margin: 0px !important;
-   word-wrap: break-word !important;
-   font-size: 14px !important;
-   line-height: 18px !important;
-   letter-spacing: normal !important;
-   font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-   text-transform: undefined !important;
-   color: #484848 !important;
-   padding-top: undefined !important;
-   padding-bottom: undefined !important;
-   font-weight: normal !important;
+  margin-bottom: 8px;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: normal;
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+  color: #484848;
+  font-weight: normal;
 `
 
 const FooterHeader = styled.div`
-font-weight: 600 !important;
-   word-wrap: break-word !important;
-   font-size: 14px !important;
-   line-height: 18px !important;
-   letter-spacing: normal !important;
-   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif !important;
-   color: rgb(72, 72, 72) !important;
-   display: inline !important;
-   margin: 0px !important;
+font-weight: 600;
+   word-wrap: break-word;
+   font-size: 14px;
+   line-height: 18px;
+   letter-spacing: normal;
+   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+   color: rgb(72, 72, 72);
+   display: inline;
+   margin: 0px;
 `
 
 const Image = styled.div`
-background-image: url(https://a0.muscache.com/airbnb/static/page3/icon-uc-tag-e7b50003027fb27234690eb38ae9abdd.gif);
-background-size: 48px !important;
-margin-top: 0px !important;
-transition: margin-top 0.4s ease 0s !important;
-background-repeat: no-repeat !important;
-background-position: right center !important;
+  background-image: url(https://a0.muscache.com/airbnb/static/page3/icon-uc-tag-e7b50003027fb27234690eb38ae9abdd.gif);
+  background-size: 48px;
+  margin-top: 0px;
+  transition: margin-top 0.4s ease 0s;
+  background-repeat: no-repeat;
+  background-position: right center;
 `
 class Booking extends React.Component {
   constructor(props) {
@@ -157,8 +160,8 @@ class Booking extends React.Component {
   }
 
   componentDidMount() {
-    let url = window.location.href.match(/[0-9]+/g)[1]
-    fetch('/house/' + url, {
+    let url = this.props.match.url.match(/[0-9]+/g)
+    fetch('/house/' + url[0], {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -166,27 +169,61 @@ class Booking extends React.Component {
       }).then((res) => {
         return res.text()
       }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
-  }
 
-  handleClick() {
-    
+    fetch('/calendar/' + url[0], {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+        }
+      }).then((res) => {
+        return res.text()
+      }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
   }
 
   render() {
     return (
-      <div style={{"marginLeft":"45px","width": "376px", "zIndex": "3", "position":"absolute","top":"32px"}}>
+      <div style={{"marginLeft":"45px","width": "376px", "zIndex": "3", "position":"absolute","top":"32px", "marginBottom":"8px"}}>
         <Booking_container>
-
         <div style={{"marginTop":"16px", "marginBottom":"8px"}}>
           <DollarPerNight>${this.state.house_info.price_per_night}</DollarPerNight>
           <PerNight> per night</PerNight>
         </div>
 
-        <span>
-        <img src="https://www.corginb.com/wp-content/uploads/2018/07/airbnb-reviews-stars.png" height="13" weight="13"></img>
-        </span>
-
-        <Reviews>{this.state.house_info.reviews}</Reviews>
+        <Reviews>
+          <Stars>
+            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
+              <path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">
+              </path>
+            </svg>
+          </Stars>
+          <Stars>
+            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
+              <path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">
+              </path>
+            </svg>
+          </Stars>
+          <Stars>
+            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
+              <path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">
+              </path>
+            </svg>
+          </Stars>
+          <Stars>
+            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
+              <path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">
+              </path>
+            </svg>
+          </Stars>
+          <Stars>
+            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
+              <path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">
+              </path>
+            </svg>
+          </Stars>
+          <span style={{"marginLeft":"4px"}}>
+            {this.state.house_info.reviews}
+          </span>
+        </Reviews>
 
         <Line></Line>
 
@@ -202,7 +239,7 @@ class Booking extends React.Component {
           <div>Total </div>
         </div>}
 
-        <Button type='button' className='bookbtn' onClick={()=>this.handleClick()}>Book</Button>
+        <Button type='button' className='bookbtn' onClick={()=>console.log('Booked!')}>Book</Button>
 
         <div style={{"marginTop":"16px", "marginBottom":"8px","verticalAlign":"middle"}}>
           <NoCharge>You won't be charged yet</NoCharge>

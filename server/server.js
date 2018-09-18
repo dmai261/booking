@@ -6,7 +6,6 @@ const port = process.env.PORT || 3004;
 app.use('/public/:id', express.static('public'));
 
 app.get('/house/:id', (req, res) => {
-
   db.House.sync().then(()=> {
     return db.House.findAll()
   }).then((data)=>{
@@ -19,8 +18,13 @@ app.get('/house/:id', (req, res) => {
   })
 })
 
-app.get('', (req, res) => {
-  res.send('woohoo')
+app.get('/calendar/:id', (req, res) => {
+  console.log(db.Calendar.findAll())
+  // db.Calendar.sync().then(()=> {
+  //   return db.Calendar.findAll()
+  // }).then((data)=>{
+  //   console.log(data);
+  // })
 });
 
 app.post('', (req, res) => {
