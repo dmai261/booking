@@ -1,39 +1,10 @@
-# Project Name
+INSTRUCTIONS ON HOW TO SEED MY DATABASE
 
-> Project description
+-- npm install --save sequelize-cli
+-- npm install --save sequelize
 
-## Related Projects
+1. Call sequelize db:create in the terminal in order to create the database;
+2. Call sequelize db:migrate
+3. call sequelize db:seed:all
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
-## Table of Contents
-
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-
-## Usage
-
-> Some usage instructions
-
-## Requirements
-
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
-## Development
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-```
-
+Also if you create a mysql database without a password, you gots to go to config/config.json and change the password
