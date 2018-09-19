@@ -188,15 +188,7 @@ class Booking extends React.Component {
   }
 
   componentDidMount() {
-  /*  ************************************************************************************ 
-
-      If you passed in the url in the form of window.location which is "http://localhost:XXXX/:id".
-      This looks for the pathname and uses regex to match the id in the url.
-
-      ************************************************************************************ 
-  */
-
-    let url = this.props.url.pathname.match(/[0-9]+/g)[0];
+    let url = this.props.homeId;
 
     fetch('http://localhost:3004/house/' + url, {
       headers : { 
@@ -216,7 +208,6 @@ class Booking extends React.Component {
           <DollarPerNight>${this.state.house_info.price_per_night}</DollarPerNight>
           <PerNight> per night</PerNight>
         </div>
-
         <Reviews>
           <Stars>
             <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
