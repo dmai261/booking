@@ -1,7 +1,6 @@
 INSTRUCTIONS ON HOW TO SEED MY DATABASE
 
--- npm install --save sequelize-cli
--- npm install --save sequelize
+-- npm install --save sequelize -g if terminal says sequelize command not found
 
 1. Call sequelize db:create in the terminal in order to create the database;
 2. Call sequelize db:migrate
