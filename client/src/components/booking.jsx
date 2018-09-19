@@ -188,21 +188,21 @@ class Booking extends React.Component {
   }
 
   componentDidMount() {
-    let url = this.props.url.href.split("/").reverse().join().match(/[0-9]+/g)[0];
-    fetch('/house/' + url, {
+  /*  ************************************************************************************ 
+
+      If you passed in the url in the form of window.location which is "http://localhost:XXXX/:id".
+      This looks for the pathname and uses regex to match the id in the url.
+
+      ************************************************************************************ 
+  */
+
+    let url = this.props.url.pathname.match(/[0-9]+/g)[0];
+
+    fetch('http://localhost:3004/house/' + url, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
        }
-      }).then((res) => {
-        return res.text()
-      }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
-
-    fetch('/calendar/' + url[0], {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-        }
       }).then((res) => {
         return res.text()
       }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
