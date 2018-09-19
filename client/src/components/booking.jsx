@@ -196,7 +196,7 @@ class Booking extends React.Component {
       ************************************************************************************ 
   */
 
-    let url = this.props.url.pathname.match(/[0-9]+/g)[0];
+    let url = this.props.homeId;
 
     fetch('http://localhost:3004/house/' + url, {
       headers : { 
