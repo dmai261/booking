@@ -47,6 +47,7 @@ const Booking_container = styled.div`
   border: 1px solid #e4e4e4;
   background-color: #ffffff;
   user-select: none;
+
 `
 
 const DollarPerNight = styled.span`
@@ -129,7 +130,7 @@ const FooterMessage = styled.div`
 `
 
 const FooterHeader = styled.div`
-font-weight: 600;
+  font-weight: 600;
    word-wrap: break-word;
    font-size: 14px;
    line-height: 18px;
@@ -189,7 +190,6 @@ class Booking extends React.Component {
 
   componentDidMount() {
     let url = this.props.homeId;
-
     fetch('http://localhost:3004/house/' + url, {
       headers : { 
         'Content-Type': 'application/json',
@@ -198,16 +198,51 @@ class Booking extends React.Component {
       }).then((res) => {
         return res.text()
       }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
+
+    window.addEventListener('scroll', ()=>{
+      this.togglePosition();
+    });
   }
 
+  // componentWillMount() {
+  //   window.addEventListener('scroll', ()=>{
+  //     this.togglePosition();
+  //   });
+  // }
+
+  togglePosition() {
+      if (window.pageYOffset >= 600) {
+        this.setState({style: {
+          "marginLeft":"45px",
+          "marginRight":"7%",
+          "width": "376px", 
+          "zIndex": "3", 
+          "marginBottom":"8px",
+          "float":"right",
+          "position":"fixed",
+          "top": 0
+        }})
+      } else {
+        this.setState({style: {
+          "marginLeft":"45px",
+          "marginRight":"7%",
+          "width": "376px", 
+          "zIndex": "3", 
+          "marginBottom":"8px",
+          "float":"right",
+          "position":"absolute",
+        }})
+      }
+  }
   render() {
     return (
-      <div style={{"marginLeft":"45px","width": "376px", "zIndex": "3", "position":"absolute","top":"32px", "marginBottom":"8px"}}>
+      <div style={this.state.style}>
         <Booking_container>
         <div style={{"marginTop":"16px", "marginBottom":"8px"}}>
           <DollarPerNight>${this.state.house_info.price_per_night}</DollarPerNight>
           <PerNight> per night</PerNight>
         </div>
+
         <Reviews>
           <Stars>
             <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
