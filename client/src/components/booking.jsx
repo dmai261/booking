@@ -131,14 +131,14 @@ const FooterMessage = styled.div`
 
 const FooterHeader = styled.div`
   font-weight: 600;
-   word-wrap: break-word;
-   font-size: 14px;
-   line-height: 18px;
-   letter-spacing: normal;
-   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-   color: rgb(72, 72, 72);
-   display: inline;
-   margin: 0px;
+  word-wrap: break-word;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: normal;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+  color: rgb(72, 72, 72);
+  display: inline;
+  margin: 0px;
 `
 
 const Image = styled.div`
@@ -190,7 +190,7 @@ class Booking extends React.Component {
 
   componentDidMount() {
     let url = this.props.homeId;
-    fetch('http://localhost:3004/house/' + url, {
+    fetch('/house/' + url, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -211,28 +211,35 @@ class Booking extends React.Component {
   // }
 
   togglePosition() {
-      if (window.pageYOffset >= 600) {
-        this.setState({style: {
-          "marginLeft":"45px",
-          "marginRight":"7%",
-          "width": "376px", 
-          "zIndex": "3", 
-          "marginBottom":"8px",
-          "float":"right",
-          "position":"fixed",
-          "top": 0
-        }})
-      } else {
-        this.setState({style: {
-          "marginLeft":"45px",
-          "marginRight":"7%",
-          "width": "376px", 
-          "zIndex": "3", 
-          "marginBottom":"8px",
-          "float":"right",
-          "position":"absolute",
-        }})
-      }
+    let containerHeight = document.getElementById('container').clientHeight;
+    let footerHeight = document.getElementById('footer').scrollHeight;
+    let galleryHeight = document.getElementById('gallery').scrollHeight;
+
+    if (window.pageYOffset >= galleryHeight + 80 && window.pageYOffset <= containerHeight - galleryHeight + 150) {
+      this.setState({style: {
+        "width": "376px", 
+        "zIndex": "3", 
+        "marginBottom":"8px",
+        "position":"fixed",
+        "top": 0
+      }})
+    } else if (window.pageYOffset < galleryHeight + 80) {
+      this.setState({style: {
+        "width": "376px", 
+        "zIndex": "3", 
+        "marginBottom":"8px",
+        "position":"absolute",
+      }})
+    } 
+    else {
+      this.setState({style: {
+        "width": "376px", 
+        "zIndex": "3", 
+        "marginBottom":"8px",
+        "position":"absolute",
+        "top": containerHeight - footerHeight - galleryHeight +100 + 'px'
+      }})
+    }
   }
   render() {
     return (
@@ -242,7 +249,6 @@ class Booking extends React.Component {
           <DollarPerNight>${this.state.house_info.price_per_night}</DollarPerNight>
           <PerNight> per night</PerNight>
         </div>
-
         <Reviews>
           <Stars>
             <svg viewBox="0 0 1000 1000" role="presentation" focusable="false" style={{"height": "1em", "width": "1em", "display": "inline-block", "fill": "currentcolor"}}>
