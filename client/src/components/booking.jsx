@@ -185,59 +185,59 @@ class Booking extends React.Component {
         Infants: 0,
       },
       fees: false,
-    }
+    };
   }
 
   componentDidMount() {
-    let url = this.props.homeId;
+    const url = this.props.homeId;
     fetch('/house/' + url, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
-      }).then((res) => {
-        return res.text()
-      }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
+      },
+    }).then((res) => {
+      return res.text()
+    }).then((data)=> {this.setState({house_info: JSON.parse(data)})});
 
     window.addEventListener('scroll', ()=>{
       this.togglePosition();
     });
   }
 
-  // componentWillMount() {
-  //   window.addEventListener('scroll', ()=>{
-  //     this.togglePosition();
-  //   });
-  // }
+  componentWillMount() {
+    window.removeEventListener('scroll', ()=>{
+      this.togglePosition();
+    });
+  }
 
   togglePosition() {
     let containerHeight = document.getElementById('container').clientHeight;
     let footerHeight = document.getElementById('footer').scrollHeight;
     let galleryHeight = document.getElementById('gallery').scrollHeight;
-
+    
     if (window.pageYOffset >= galleryHeight + 80 && window.pageYOffset <= containerHeight - galleryHeight + 150) {
       this.setState({style: {
-        "width": "376px", 
-        "zIndex": "3", 
-        "marginBottom":"8px",
-        "position":"fixed",
-        "top": 0
+        'width': '376px', 
+        'zIndex': '1', 
+        'marginBottom':'8px',
+        'position':'fixed',
+        'top': 0
       }})
     } else if (window.pageYOffset < galleryHeight + 80) {
       this.setState({style: {
-        "width": "376px", 
-        "zIndex": "3", 
-        "marginBottom":"8px",
-        "position":"absolute",
+        'width': '376px', 
+        'zIndex': '1', 
+        'marginBottom':'8px',
+        // 'position':'absolute',
       }})
     } 
     else {
       this.setState({style: {
-        "width": "376px", 
-        "zIndex": "3", 
-        "marginBottom":"8px",
-        "position":"absolute",
-        "top": containerHeight - footerHeight - galleryHeight +100 + 'px'
+        'width': '376px', 
+        'zIndex': '1', 
+        'marginBottom':'8px',
+        'position':'absolute',
+        'top': containerHeight - footerHeight - galleryHeight +100 + 'px'
       }})
     }
   }
