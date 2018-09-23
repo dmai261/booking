@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
+    "username": "dxmai",
     "password": "password",
     "database": "booking",
-    "host": "127.0.0.1",
+    "host": "bookingdata.cdljpmqz8ngi.us-west-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }

@@ -8,8 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "nodemon server/server.js",
-    "live": "live-server --port=3004",
+    "start": "node server/server.js",
     "react-dev": "webpack -D --watch",
     "test": "jest"
   },
@@ -25,7 +24,7 @@
     "react-dom": "^16.5.0",
     "react-router-dom": "^4.3.1",
     "sequelize": "^4.38.0",
-    "styled-components": "^3.4.6"
+    "styled-components": "^2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

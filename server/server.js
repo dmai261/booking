@@ -3,8 +3,8 @@ const db = require('../database/database.js')
 const app = express();
 const port = process.env.PORT || 3004;
 
-app.use('/public/:id', express.static('public'));
-
+app.use('/:id', express.static('public'));
+console.log('lol')
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -12,7 +12,7 @@ app.use(function(req, res, next) {
  });
 
 app.get('/house/:id', (req, res) => {
-  db.House.sync().then(()=> {
+  db.House.sync() .then(()=> {
     return db.House.findAll()
   }).then((data)=>{
     for (var i = 0; i < data.length; i++) {

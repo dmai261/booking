@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
+// const config = require('../config/config.json');
 
-const sequelize = new Sequelize('booking', 'root', null, {
-  host: 'localhost',
+const sequelize = new Sequelize('booking', 'dxmai', 'password', {
+  host: "bookingdata.cdljpmqz8ngi.us-west-1.rds.amazonaws.com",
   dialect: 'mysql',
 });
 

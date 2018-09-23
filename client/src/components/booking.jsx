@@ -47,7 +47,6 @@ const Booking_container = styled.div`
   border: 1px solid #e4e4e4;
   background-color: #ffffff;
   user-select: none;
-
 `
 
 const DollarPerNight = styled.span`

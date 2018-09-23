@@ -180,6 +180,8 @@ class Calendar extends React.Component {
       startDateCalendarPicker: false,
       endDateCalendarPicker: false,
       dateChosen: [],
+      checkIn: false,
+      checkOut: false,
     }
   }
 
@@ -212,12 +214,12 @@ class Calendar extends React.Component {
 
   startDatePicker(date) {
     this.setState((prevState)=>{
-      return {startDate: date, startDateCalendarPicker: false, endDateCalendarPicker: true}
+      return {startDate: date, startDateCalendarPicker: false, endDateCalendarPicker: true, checkIn: !this.state.checkIn, checkOut: true }
     });
   }
 
   endDatePicker(date) {
-    this.setState({endDate: date, endDateCalendarPicker: false},(prevState)=>{
+    this.setState({endDate: date, endDateCalendarPicker: false, checkIn: false, checkOut: false},(prevState)=>{
       if (this.state.startDate && this.state.endDate) {
         let days = Math.abs((new Date(this.state.endDate) - new Date(this.state.startDate)) / (1000*60*60*24));
         this.props.stateSetter({fees: true, days: days});
@@ -237,10 +239,12 @@ class Calendar extends React.Component {
           <div style={{'fontWeight':'600'}}>
           <StyledWordContainer>
 
-              <StyledWordCheckIn onClick={()=>this.setState({'endDateCalendarPicker': false, 'startDateCalendarPicker': !this.state.startDateCalendarPicker})}>
-                <div style={{'whiteSpace': 'no-wrap', 'overflow':'hidden'}}>
-                  Check in
-                </div>
+              <StyledWordCheckIn onClick={()=>this.setState({'endDateCalendarPicker': false, 'startDateCalendarPicker': !this.state.startDateCalendarPicker, checkIn: !this.state.checkIn, checkOut: false})}>
+                {this.state.checkIn ?
+                  <span style={{'background': 'rgb(153, 237, 230)', 'border-color':'rgb(153, 237, 230)', "border-radius":"3px"}}>
+                    Check in
+                  </span>
+                  : <span>Check in</span>}
               </StyledWordCheckIn>
 
               <StyledArrow>
@@ -250,8 +254,12 @@ class Calendar extends React.Component {
                 </svg>
               </StyledArrow>
 
-              <StyledWordCheckOut onClick={()=>this.setState({'endDateCalendarPicker': !this.state.endDateCalendarPicker, 'startDateCalendarPicker': false})}>
-                Check out
+              <StyledWordCheckOut onClick={()=>this.setState({'endDateCalendarPicker': !this.state.endDateCalendarPicker, 'startDateCalendarPicker': false, checkIn: false, checkOut: !this.state.checkOut})}>
+                {this.state.checkOut ?
+                  <span style={{'background': 'rgb(153, 237, 230)', 'border-color':'rgb(153, 237, 230)', "border-radius":"3px"}}>
+                    Check out
+                  </span>
+                  : <span>Check out</span>}
               </StyledWordCheckOut>
 
           </StyledWordContainer>
@@ -272,7 +280,7 @@ class Calendar extends React.Component {
               </LeftArrowContainer>
 
               <MonthHeader>
-                {this.state.monthSelected.format('MMMM')}
+                {this.state.monthSelected.format('MMMM') + ' ' + this.state.monthSelected.format('YYYY')}
               </MonthHeader>
 
               <RightArrowContainer onClick={()=>this.setState((prevState, props)=>({monthSelected: prevState.monthSelected.add(1,'month')}))}>
@@ -330,7 +338,7 @@ class Calendar extends React.Component {
               </LeftArrowContainer>
 
               <MonthHeader>
-                {this.state.monthSelected.format('MMMM')}
+                {this.state.monthSelected.format('MMMM') + ' ' + this.state.monthSelected.format('YYYY')}
               </MonthHeader>
 
               <RightArrowContainer onClick={()=>this.setState((prevState, props)=>({monthSelected: prevState.monthSelected.add(1,'month')}))}>
